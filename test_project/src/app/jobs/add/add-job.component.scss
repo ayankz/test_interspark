@@ -1,0 +1,24 @@
+.wrapper{
+  margin: 100px auto;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 12px 16px;
+  border: 1px solid #d2cece;
+  border-radius: 8px;
+}
+.col{
+  display: flex;
+  flex-direction: column;
+}
+::ng-deep mat-form-field {
+  width: 400px;
+}
+.control{
+  padding: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
