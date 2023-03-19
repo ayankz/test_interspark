@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CrudService} from "../services/crud.service";
+import {DatePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add',
@@ -7,19 +10,31 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./add-job.component.scss']
 })
 export class AddJobComponent implements OnInit{
+  public success: boolean = false;
+  constructor(public service: CrudService, private Date: DatePipe, public route:Router) {
+  }
   public jobForm: FormGroup
  ngOnInit() {
     this.jobForm = new FormGroup({
-      number : new FormControl('', [Validators.required]),
-      title : new FormControl('', [Validators.required]),
-      openings : new FormControl('', [Validators.required]),
-      note : new FormControl('', [Validators.required]),
-      start : new FormControl('', [Validators.required]),
-      close : new FormControl('', [Validators.required]),
-      experience : new FormControl('', [Validators.required]),
+      job_number : new FormControl('', [Validators.required]),
+      job_title : new FormControl('', [Validators.required]),
+      number_of_openings : new FormControl('', [Validators.required]),
+      job_notes : new FormControl('', [Validators.required]),
+      job_start_date : new FormControl('', [Validators.required]),
+      job_close_date : new FormControl('', [Validators.required]),
+      experience_required : new FormControl('', [Validators.required]),
     })
  }
   onSubmit(){
-    console.log(this.jobForm.value)
+    this.jobForm.value.job_start_date = this.Date.transform(this.jobForm.value.job_start_date,'yyyy-MM-dd');
+    this.jobForm.value.job_close_date = this.Date.transform(this.jobForm.value.job_close_date,'yyyy-MM-dd');
+    this.service.addJob(this.jobForm.value).subscribe(res=>{
+      this.success = true;
+      setTimeout(()=>{
+        this.route.navigate(['/jobs'])
+      }, 2000)
+    })
+
+
   }
 }

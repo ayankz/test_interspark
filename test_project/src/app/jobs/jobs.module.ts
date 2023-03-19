@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {AsyncPipe, CommonModule} from '@angular/common';
+import {AsyncPipe, CommonModule, DatePipe} from '@angular/common';
 import { JobsComponent } from './jobs.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
@@ -38,6 +38,6 @@ const routes: Routes = [
     MatCheckboxModule,
     MatButtonModule
   ],
-  providers:[CrudService]
+  providers:[CrudService, DatePipe]
 })
 export class JobsModule { }
