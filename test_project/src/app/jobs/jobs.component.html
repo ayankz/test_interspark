@@ -1,0 +1,66 @@
+<div class="container">
+  <header>
+    <h1>Job List</h1>
+    <form>
+      <div class="row">
+        <div class="col-xs-3 col-sm-auto">
+          <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary">Add new job</button>
+    </form>
+  </header>
+  <div class="content">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Number</th>
+        <th scope="col">Job title</th>
+        <th scope="col">Starting Date</th>
+        <th scope="col">Close Date</th>
+        <th scope="col">Experienced</th>
+        <th scope="col">Total open jobs</th>
+        <th scope="col">Job notes</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let job of jobs$ | async; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{job.job_number}}
+        </td>
+        <td>
+          {{job.job_title}}
+        </td>
+        <td>
+          {{job.job_start_date}}
+        </td>
+        <td>
+          {{job.job_close_date}}
+        </td>
+        <td>
+          {{job.experience_required}}
+        </td>
+        <td>
+          {{job.number_of_openings}}
+        </td>
+        <td>
+          {{job.job_notes}}
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-info">Edit</button>
+        </td>
+
+        <!--    <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>-->
+        <!--    <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>-->
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
