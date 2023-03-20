@@ -2,12 +2,8 @@
   <header>
     <h1>Job List</h1>
     <form>
-      <div class="row">
-        <div class="col-xs-3 col-sm-auto">
-          <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary" routerLink="new">Add new job</button>
+          <input class="form-control" type="text" name="searchText" [(ngModel)]="searchText" />
+      <button mat-raised-button color="primary" routerLink="new">Add new job</button>
     </form>
   </header>
   <div class="content">
@@ -23,10 +19,11 @@
         <th scope="col">Total open jobs</th>
         <th scope="col">Job notes</th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let job of jobs$ | async; index as i">
+      <tr *ngFor="let job of jobs$  | search:searchText; index as i">
         <th scope="row">{{ i + 1 }}</th>
         <td>
           {{job.job_number}}
@@ -50,10 +47,10 @@
           {{job.job_notes}}
         </td>
         <td>
-          <button type="button" class="btn btn-danger">Delete</button>
+          <button mat-raised-button color="warn" (click)="onDelete(job.id)">Delete</button>
         </td>
         <td>
-          <button type="button" class="btn btn-info">Edit</button>
+          <button mat-raised-button [routerLink]="[job.id]">Edit</button>
         </td>
       </tr>
       </tbody>

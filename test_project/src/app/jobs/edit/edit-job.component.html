@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <h2>Edit new job</h2>
+  <h2 class="success" *ngIf="success">You've successfully update job</h2>
+  <form *ngIf="!success" class="example-container col" [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" >
+      <mat-label>Job number</mat-label>
+      <input matInput formControlName="job_number">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Job title</mat-label>
+      <input matInput formControlName="job_title">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Number of openings</mat-label>
+      <input matInput type="number" formControlName="number_of_openings">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Job notes</mat-label>
+      <textarea matInput formControlName="job_notes"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Job start date</mat-label>
+      <input matInput  [matDatepicker]="picker1" formControlName="job_start_date">
+      <mat-datepicker-toggle matIconSuffix [for]="picker1">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Job close date</mat-label>
+      <input matInput [min]="jobForm.value.job_start_date"  [matDatepicker]="picker" formControlName="job_close_date">
+      <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-checkbox formControlName="experience_required">Experience required</mat-checkbox>
+    <div class="control">
+      <button mat-raised-button color="primary" type="submit"  [disabled]="jobForm.invalid">Submit</button>
+      <button type="button"  mat-raised-button routerLink="/jobs">Cancel</button>
+    </div>
+  </form>
+</div>

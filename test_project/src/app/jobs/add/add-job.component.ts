@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CrudService} from "../services/crud.service";
+import {CrudService} from "../common/crud.service";
 import {DatePipe} from "@angular/common";
 import {Router} from "@angular/router";
 
@@ -34,7 +34,5 @@ export class AddJobComponent implements OnInit{
         this.route.navigate(['/jobs'])
       }, 2000)
     })
-
-
   }
 }

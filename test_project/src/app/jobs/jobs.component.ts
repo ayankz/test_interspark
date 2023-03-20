@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CrudService} from "./services/crud.service";
+import {CrudService} from "./common/crud.service";
 import {Observable} from "rxjs";
 import {Job} from "./model/job";
 import {FormControl} from "@angular/forms";
@@ -11,14 +11,18 @@ import {Router} from "@angular/router";
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements  OnInit{
-  public jobs$:Observable<any>
-  filter = new FormControl('', { nonNullable: true });
+  public jobs$:Job[]
+  public searchText:string = '';
   constructor(public service: CrudService, public router: Router) {
   }
  ngOnInit() {
-    this.jobs$ = this.service.getJobs()
+    this.service.getJobs().subscribe(res=>{
+      this.jobs$ = res
+    })
  }
-  addJob(){
-    console.log('dsadasdas')
+  onDelete(id){
+    this.service.deleteJob(id).subscribe(()=>{
+      this.ngOnInit()
+    })
   }
 }
